@@ -14,7 +14,7 @@ class BreakTimeApp extends StatelessWidget {
       title: 'BreakTime',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: Colors.white, // Set background color to white
+        scaffoldBackgroundColor: Colors.white,
       ),
       home: const LoginScreen(),
     );
