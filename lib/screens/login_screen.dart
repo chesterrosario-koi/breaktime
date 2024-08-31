@@ -6,7 +6,6 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // The Scaffold widget will inherit the white background from the MaterialApp theme
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -43,17 +42,20 @@ class LoginScreen extends StatelessWidget {
               },
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 16),
-                backgroundColor: Colors.blue, // Button color
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.blue,
               ),
               child: const Text('Login', style: TextStyle(fontSize: 18)),
             ),
             const SizedBox(height: 16),
-            OutlinedButton(
+            ElevatedButton(
               onPressed: () {
                 // Handle registration
               },
-              style: OutlinedButton.styleFrom(
+              style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 16),
+                foregroundColor: Colors.black,
+                backgroundColor: Colors.grey.shade300,
               ),
               child: const Text('Register', style: TextStyle(fontSize: 18)),
             ),
