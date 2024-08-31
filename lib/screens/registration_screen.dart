@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/custom_app_bar.dart';
 import 'home_screen.dart';
 
 class RegistrationScreen extends StatelessWidget {
@@ -7,15 +8,7 @@ class RegistrationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Create an account'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
+      appBar: const CustomAppBar(title: 'Create an account'),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
@@ -76,8 +69,8 @@ class RegistrationScreen extends StatelessWidget {
                 },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 16),
-                  foregroundColor: Colors.white,
                   backgroundColor: Colors.blue,
+                  foregroundColor: Colors.white,
                 ),
                 child: const Text('Create', style: TextStyle(fontSize: 18)),
               ),
