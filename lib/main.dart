@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/login_screen.dart';
+import 'screens/registration_screen.dart';
 
 void main() {
   runApp(const BreakTimeApp());
@@ -16,7 +17,11 @@ class BreakTimeApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: Colors.white,
       ),
-      home: const LoginScreen(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const LoginScreen(),
+        '/register': (context) => const RegistrationScreen(),
+      },
     );
   }
 }
