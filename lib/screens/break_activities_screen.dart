@@ -1,8 +1,9 @@
-import 'package:breaktime/screens/add_break_activity_screen.dart';
-import 'package:breaktime/screens/home_screen.dart';
+import 'package:breaktime/utils/snackbar_utils.dart';
 import 'package:flutter/material.dart';
 import '../widgets/custom_app_bar.dart';
 import '../widgets/custom_bottom_nav_bar.dart';
+import 'add_break_activity_screen.dart';
+import 'home_screen.dart';
 
 class BreakActivitiesScreen extends StatefulWidget {
   const BreakActivitiesScreen({super.key});
@@ -12,7 +13,7 @@ class BreakActivitiesScreen extends StatefulWidget {
 }
 
 class _BreakActivitiesScreenState extends State<BreakActivitiesScreen> {
-  int _selectedIndex = 1; // Assuming 'Activities' is at index 1 in the bottom nav
+  int _selectedIndex = 1;
 
   void _onItemTapped(int index) {
     handleBottomNavigationTap(context, index);
@@ -35,11 +36,15 @@ class _BreakActivitiesScreenState extends State<BreakActivitiesScreen> {
         },
         action: IconButton(
           icon: const Icon(Icons.add),
-          onPressed: () {
-            Navigator.push(
+          onPressed: () async {
+            final result = await Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const AddBreakActivityScreen()),
             );
+
+            if (result == 'add') {
+              showCustomSnackBar(context, 'Break activity saved!');
+            }
           },
         ),
       ),

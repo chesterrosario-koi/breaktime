@@ -52,7 +52,7 @@ class _AddBreakActivityScreenState extends State<AddBreakActivityScreen> {
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
-                // Handle save action
+                Navigator.pop(context, 'add');
               },
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 16),
