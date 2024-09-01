@@ -22,14 +22,15 @@ class ViewBreakActivityScreen extends StatefulWidget {
 
 class _ViewBreakActivityScreenState extends State<ViewBreakActivityScreen> {
   int _selectedIndex = 1;
-  late String name;
-  late String? details;
+
+  late TextEditingController _nameController;
+  late TextEditingController _detailsController;
 
   @override
   void initState() {
     super.initState();
-    name = widget.name;
-    details = widget.details;
+    _nameController = TextEditingController(text: widget.name);
+    _detailsController = TextEditingController(text: widget.details ?? '');
   }
 
   void _onItemTapped(int index) {
@@ -61,7 +62,7 @@ class _ViewBreakActivityScreenState extends State<ViewBreakActivityScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             TextFormField(
-              initialValue: name,
+              controller: _nameController,
               readOnly: true,
               style: const TextStyle(color: Colors.grey),
               decoration: const InputDecoration(
@@ -70,9 +71,9 @@ class _ViewBreakActivityScreenState extends State<ViewBreakActivityScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            if (details != null && details!.isNotEmpty) ...[
+            if (_detailsController.text.isNotEmpty) ...[
               TextFormField(
-                initialValue: details,
+                controller: _detailsController,
                 readOnly: true,
                 style: const TextStyle(color: Colors.grey),
                 maxLines: 5,
@@ -102,19 +103,19 @@ class _ViewBreakActivityScreenState extends State<ViewBreakActivityScreen> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => EditBreakActivityScreen(
-                      name: name,
-                      details: details,
+                      name: _nameController.text,
+                      details: _detailsController.text,
                     ),
                   ),
                 );
 
                 if (result != null && result is Map<String, String>) {
                   setState(() {
-                    name = result['name']!;
-                    details = result['details']!;
+                    _nameController.text = result['name']!;
+                    _detailsController.text = result['details']!;
                   });
 
-                  widget.onUpdate(name, details ?? '');
+                  widget.onUpdate(_nameController.text, _detailsController.text);
                   showCustomSnackBar(context, 'Break activity updated!');
                 }
               },
