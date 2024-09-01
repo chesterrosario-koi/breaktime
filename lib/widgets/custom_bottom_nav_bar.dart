@@ -1,4 +1,5 @@
 import 'package:breaktime/screens/break_activities_screen.dart';
+import 'package:breaktime/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 import '../screens/home_screen.dart';
 import '../screens/schedule_screen.dart';
@@ -81,7 +82,10 @@ void handleBottomNavigationTap(BuildContext context, int index) {
       // Navigate to the Articles screen
       break;
     case 4:
-      // Navigate to the Settings screen
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const SettingsScreen()),
+      );
       break;
     default:
       break;
