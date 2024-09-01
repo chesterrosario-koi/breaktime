@@ -1,3 +1,4 @@
+import 'package:breaktime/screens/schedule_screen.dart';
 import 'package:flutter/material.dart';
 import '../widgets/custom_app_bar.dart';
 import '../widgets/custom_bottom_nav_bar.dart';
@@ -69,7 +70,10 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: 32),
             ElevatedButton(
               onPressed: () {
-                // Navigate to the Schedule screen
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ScheduleScreen()),
+                );
               },
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 16),
