@@ -11,20 +11,18 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 2;
-  bool _isTimerRunning = false; // Track whether the timer is running
+  bool _isTimerRunning = false;
 
   void _onItemTapped(int index) {
+    handleBottomNavigationTap(context, index);
     setState(() {
       _selectedIndex = index;
-      // Handle navigation based on the selected index
-      // For now, we'll just switch between the screens.
-      // You would ideally navigate to different screens.
     });
   }
 
   void _toggleTimer() {
     setState(() {
-      _isTimerRunning = !_isTimerRunning; // Toggle the timer state
+      _isTimerRunning = !_isTimerRunning;
     });
   }
 
@@ -33,17 +31,17 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: const CustomAppBar(
         title: 'My Dashboard',
-        showBackButton: false,  // Hide the back arrow button
+        showBackButton: false,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0), // Add padding around the content
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Center(
               child: GestureDetector(
-                onTap: _toggleTimer, // Toggle timer on tap
+                onTap: _toggleTimer,
                 child: Container(
                   width: 250,
                   height: 250,

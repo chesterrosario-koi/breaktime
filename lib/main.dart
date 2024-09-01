@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'screens/login_screen.dart';
 import 'screens/registration_screen.dart';
+import 'screens/home_screen.dart';
+import 'screens/schedule_screen.dart';
 
 void main() {
   runApp(const BreakTimeApp());
@@ -21,6 +23,8 @@ class BreakTimeApp extends StatelessWidget {
       routes: {
         '/': (context) => const LoginScreen(),
         '/register': (context) => const RegistrationScreen(),
+        '/home': (context) => const HomeScreen(),
+        '/schedule': (context) => const ScheduleScreen(),
       },
     );
   }

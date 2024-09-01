@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../screens/home_screen.dart';
+import '../screens/schedule_screen.dart';
+// Import other screens as needed
 
 class CustomBottomNavBar extends StatelessWidget {
   final int currentIndex;
@@ -50,5 +53,33 @@ class CustomBottomNavBar extends StatelessWidget {
         onTap: onTap,
       ),
     );
+  }
+}
+
+void handleBottomNavigationTap(BuildContext context, int index) {
+  switch (index) {
+    case 0:
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const ScheduleScreen()),
+      );
+      break;
+    case 1:
+      // Navigate to the Activities screen
+      break;
+    case 2:
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const HomeScreen()),
+      );
+      break;
+    case 3:
+      // Navigate to the Articles screen
+      break;
+    case 4:
+      // Navigate to the Settings screen
+      break;
+    default:
+      break;
   }
 }
