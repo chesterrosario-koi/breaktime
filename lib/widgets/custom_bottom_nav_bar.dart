@@ -1,3 +1,4 @@
+import 'package:breaktime/screens/break_activities_screen.dart';
 import 'package:flutter/material.dart';
 import '../screens/home_screen.dart';
 import '../screens/schedule_screen.dart';
@@ -65,7 +66,10 @@ void handleBottomNavigationTap(BuildContext context, int index) {
       );
       break;
     case 1:
-      // Navigate to the Activities screen
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const BreakActivitiesScreen()),
+      );
       break;
     case 2:
       Navigator.pushReplacement(

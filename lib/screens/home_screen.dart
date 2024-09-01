@@ -1,3 +1,4 @@
+import 'package:breaktime/screens/break_activities_screen.dart';
 import 'package:breaktime/screens/schedule_screen.dart';
 import 'package:flutter/material.dart';
 import '../widgets/custom_app_bar.dart';
@@ -85,7 +86,10 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
-                // Navigate to the Break activities screen
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const BreakActivitiesScreen()),
+                );
               },
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 16),
