@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import '../models/activity.dart';
 import '../widgets/custom_app_bar.dart';
 import '../widgets/custom_bottom_nav_bar.dart';
 import 'add_break_activity_screen.dart';
+import 'view_break_activity_screen.dart';
 import 'home_screen.dart';
 import '../utils/snackbar_utils.dart';
-import '../models/activity.dart';
 
 class BreakActivitiesScreen extends StatefulWidget {
   const BreakActivitiesScreen({super.key});
@@ -36,6 +37,12 @@ class _BreakActivitiesScreenState extends State<BreakActivitiesScreen> {
     });
   }
 
+  void _deleteActivity(int index) {
+    setState(() {
+      activities.removeAt(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +63,7 @@ class _BreakActivitiesScreenState extends State<BreakActivitiesScreen> {
               MaterialPageRoute(builder: (context) => const AddBreakActivityScreen()),
             );
 
-            if (result['action'] == 'add') {
+            if (result != null && result is Map<String, String>) {
               _addActivity(result['name']!, result['details']!);
               showCustomSnackBar(context, 'Break activity saved!');
             }
@@ -70,7 +77,25 @@ class _BreakActivitiesScreenState extends State<BreakActivitiesScreen> {
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.only(bottom: 16.0),
-              child: _buildActivityItem(activities[index]),
+              child: GestureDetector(
+                onTap: () async {
+                  final result = await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ViewBreakActivityScreen(
+                        name: activities[index].name,
+                        details: activities[index].details,
+                      ),
+                    ),
+                  );
+
+                  if (result == 'delete') {
+                    _deleteActivity(index);
+                    showCustomSnackBar(context, 'Break activity deleted!');
+                  }
+                },
+                child: _buildActivityItem(activities[index], index),
+              ),
             );
           },
         ),
@@ -82,7 +107,7 @@ class _BreakActivitiesScreenState extends State<BreakActivitiesScreen> {
     );
   }
 
-  Widget _buildActivityItem(Activity activity) {
+  Widget _buildActivityItem(Activity activity, int index) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       decoration: BoxDecoration(
@@ -101,8 +126,21 @@ class _BreakActivitiesScreenState extends State<BreakActivitiesScreen> {
           ),
           IconButton(
             icon: const Icon(Icons.visibility),
-            onPressed: () {
-              // Handle view action
+            onPressed: () async {
+              final result = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ViewBreakActivityScreen(
+                    name: activity.name,
+                    details: activity.details,
+                  ),
+                ),
+              );
+
+              if (result == 'delete') {
+                _deleteActivity(index);
+                showCustomSnackBar(context, 'Break activity deleted!');
+              }
             },
           ),
         ],
