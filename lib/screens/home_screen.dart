@@ -1,3 +1,4 @@
+import 'package:breaktime/screens/articles_screen.dart';
 import 'package:breaktime/screens/break_activities_screen.dart';
 import 'package:breaktime/screens/schedule_screen.dart';
 import 'package:flutter/material.dart';
@@ -101,7 +102,10 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
-                // Navigate to the Articles screen
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ArticlesScreen()),
+                );
               },
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 16),

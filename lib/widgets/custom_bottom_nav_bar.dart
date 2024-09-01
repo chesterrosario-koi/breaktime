@@ -1,9 +1,9 @@
+import 'package:breaktime/screens/articles_screen.dart';
 import 'package:breaktime/screens/break_activities_screen.dart';
 import 'package:breaktime/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 import '../screens/home_screen.dart';
 import '../screens/schedule_screen.dart';
-// Import other screens as needed
 
 class CustomBottomNavBar extends StatelessWidget {
   final int currentIndex;
@@ -79,7 +79,10 @@ void handleBottomNavigationTap(BuildContext context, int index) {
       );
       break;
     case 3:
-      // Navigate to the Articles screen
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const ArticlesScreen()),
+      );
       break;
     case 4:
       Navigator.push(
