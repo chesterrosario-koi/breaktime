@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/custom_app_bar.dart';
 import '../widgets/custom_bottom_nav_bar.dart';
+import 'home_screen.dart';
 
 class ScheduleScreen extends StatefulWidget {
   const ScheduleScreen({super.key});
@@ -64,9 +65,14 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(
+      appBar: CustomAppBar(
         title: 'Schedule',
-        showBackButton: true,
+        onBackButtonPressed: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const HomeScreen()),
+          );
+        },
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

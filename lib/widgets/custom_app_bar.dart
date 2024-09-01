@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool showBackButton;
+  final VoidCallback? onBackButtonPressed; // Optional callback for back button
 
   const CustomAppBar({
     super.key,
     required this.title,
     this.showBackButton = true,
+    this.onBackButtonPressed,
   });
 
   @override
@@ -18,11 +20,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: showBackButton
           ? IconButton(
               icon: const Icon(Icons.arrow_back, color: Colors.black),
-              onPressed: () {
+              onPressed: onBackButtonPressed ?? () {
                 Navigator.pop(context);
               },
             )
-          : const SizedBox.shrink(),  // Use an empty widget to hide the back button
+          : const SizedBox.shrink(),
       title: Text(
         title,
         style: const TextStyle(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/custom_app_bar.dart';
+import 'login_screen.dart';
 import 'home_screen.dart';
 
 class RegistrationScreen extends StatelessWidget {
@@ -8,7 +9,15 @@ class RegistrationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: 'Create an account'),
+      appBar: CustomAppBar(
+        title: 'Create an account',
+        onBackButtonPressed: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const LoginScreen()),
+          );
+        },
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
