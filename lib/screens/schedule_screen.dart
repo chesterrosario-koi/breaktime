@@ -76,79 +76,84 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Expanded(
-              child: ListView(
-                children: _startTimes.keys.map((day) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Row(
+        child: ListView(
+          children: _startTimes.keys.map((day) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                day,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const Text('Start'),
-                              GestureDetector(
-                                onTap: () => _selectTime(context, day, true),
-                                child: AbsorbPointer(
-                                  child: TextFormField(
-                                    decoration: InputDecoration(
-                                      border: const OutlineInputBorder(),
-                                      hintText: _formatTimeOfDay(_startTimes[day]!),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+                        Text(
+                          day,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text('End'),
-                              GestureDetector(
-                                onTap: () => _selectTime(context, day, false),
-                                child: AbsorbPointer(
-                                  child: TextFormField(
-                                    decoration: InputDecoration(
-                                      border: const OutlineInputBorder(),
-                                      hintText: _formatTimeOfDay(_endTimes[day]!),
-                                    ),
-                                  ),
-                                ),
+                        const SizedBox(height: 8),
+                        const Text('Start'),
+                        GestureDetector(
+                          onTap: () => _selectTime(context, day, true),
+                          child: AbsorbPointer(
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: 10),
+                                border: const OutlineInputBorder(),
+                                hintText: _formatTimeOfDay(_startTimes[day]!),
                               ),
-                            ],
+                            ),
                           ),
                         ),
                       ],
                     ),
-                  );
-                }).toList(),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 30),
+                        const Text('End'),
+                        GestureDetector(
+                          onTap: () => _selectTime(context, day, false),
+                          child: AbsorbPointer(
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: 10),
+                                border: const OutlineInputBorder(),
+                                hintText: _formatTimeOfDay(_endTimes[day]!),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }).toList()
+            ..add(
+              Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Handle save action
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    backgroundColor: Colors.blue,
+                    foregroundColor: Colors.white,
+                  ),
+                  child: const Text('Save', style: TextStyle(fontSize: 18)),
+                ),
               ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                // Handle save action
-              },
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                backgroundColor: Colors.blue,
-                foregroundColor: Colors.white,
-              ),
-              child: const Text('Save', style: TextStyle(fontSize: 18)),
-            ),
-          ],
         ),
       ),
       bottomNavigationBar: CustomBottomNavBar(
