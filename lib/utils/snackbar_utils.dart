@@ -37,7 +37,9 @@ void showCustomSnackBar(BuildContext context, String message) {
               IconButton(
                 icon: const Icon(Icons.close, color: Colors.white),
                 onPressed: () {
-                  overlayEntry.remove();
+                  if (overlayEntry.mounted) {
+                    overlayEntry.remove();
+                  }
                 },
               ),
             ],
@@ -50,6 +52,8 @@ void showCustomSnackBar(BuildContext context, String message) {
   overlay.insert(overlayEntry);
 
   Future.delayed(const Duration(seconds: 3)).then((_) {
-    overlayEntry.remove();
+    if (overlayEntry.mounted) {
+      overlayEntry.remove();
+    }
   });
 }
