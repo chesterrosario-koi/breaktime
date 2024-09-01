@@ -11,6 +11,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 2;
+  bool _isTimerRunning = false; // Track whether the timer is running
 
   void _onItemTapped(int index) {
     setState(() {
@@ -18,6 +19,12 @@ class _HomeScreenState extends State<HomeScreen> {
       // Handle navigation based on the selected index
       // For now, we'll just switch between the screens.
       // You would ideally navigate to different screens.
+    });
+  }
+
+  void _toggleTimer() {
+    setState(() {
+      _isTimerRunning = !_isTimerRunning; // Toggle the timer state
     });
   }
 
@@ -36,18 +43,16 @@ class _HomeScreenState extends State<HomeScreen> {
           children: <Widget>[
             Center(
               child: GestureDetector(
-                onTap: () {
-                  // Handle start timer action
-                },
+                onTap: _toggleTimer, // Toggle timer on tap
                 child: Container(
                   width: 250,
                   height: 250,
-                  decoration: const BoxDecoration(
-                    color: Colors.green,
+                  decoration: BoxDecoration(
+                    color: _isTimerRunning ? Colors.red : Colors.green,
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(
-                    Icons.play_arrow,
+                  child: Icon(
+                    _isTimerRunning ? Icons.stop : Icons.play_arrow,
                     size: 150,
                     color: Colors.white,
                   ),
@@ -55,10 +60,10 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            const Text(
-              'Start my break timer!',
+            Text(
+              _isTimerRunning ? 'Stop my break timer!' : 'Start my break timer!',
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
