@@ -1,15 +1,19 @@
+import 'package:breaktime/utils/snackbar_utils.dart';
 import 'package:flutter/material.dart';
 import '../widgets/custom_app_bar.dart';
 import '../widgets/custom_bottom_nav_bar.dart';
+import 'edit_break_activity_screen.dart';
 
 class ViewBreakActivityScreen extends StatefulWidget {
   final String name;
   final String? details;
+  final Function(String name, String details) onUpdate;
 
   const ViewBreakActivityScreen({
     super.key,
     required this.name,
     this.details,
+    required this.onUpdate,
   });
 
   @override
@@ -18,6 +22,15 @@ class ViewBreakActivityScreen extends StatefulWidget {
 
 class _ViewBreakActivityScreenState extends State<ViewBreakActivityScreen> {
   int _selectedIndex = 1;
+  late String name;
+  late String? details;
+
+  @override
+  void initState() {
+    super.initState();
+    name = widget.name;
+    details = widget.details;
+  }
 
   void _onItemTapped(int index) {
     handleBottomNavigationTap(context, index);
@@ -48,18 +61,20 @@ class _ViewBreakActivityScreenState extends State<ViewBreakActivityScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             TextFormField(
-              initialValue: widget.name,
+              initialValue: name,
               readOnly: true,
+              style: const TextStyle(color: Colors.grey),
               decoration: const InputDecoration(
                 labelText: 'Name',
                 border: OutlineInputBorder(),
               ),
             ),
             const SizedBox(height: 16),
-            if (widget.details != null && widget.details!.isNotEmpty) ...[
+            if (details != null && details!.isNotEmpty) ...[
               TextFormField(
-                initialValue: widget.details,
+                initialValue: details,
                 readOnly: true,
+                style: const TextStyle(color: Colors.grey),
                 maxLines: 5,
                 decoration: const InputDecoration(
                   labelText: 'Details',
@@ -82,8 +97,26 @@ class _ViewBreakActivityScreenState extends State<ViewBreakActivityScreen> {
             ],
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () {
-                // Navigate to the edit screen
+              onPressed: () async {
+                final result = await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => EditBreakActivityScreen(
+                      name: name,
+                      details: details,
+                    ),
+                  ),
+                );
+
+                if (result != null && result is Map<String, String>) {
+                  setState(() {
+                    name = result['name']!;
+                    details = result['details']!;
+                  });
+
+                  widget.onUpdate(name, details ?? '');
+                  showCustomSnackBar(context, 'Break activity updated!');
+                }
               },
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 16),

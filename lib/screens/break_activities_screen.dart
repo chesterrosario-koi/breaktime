@@ -37,6 +37,12 @@ class _BreakActivitiesScreenState extends State<BreakActivitiesScreen> {
     });
   }
 
+  void _updateActivity(int index, String name, String details) {
+    setState(() {
+      activities[index] = Activity(name: name, details: details);
+    });
+  }
+
   void _deleteActivity(int index) {
     setState(() {
       activities.removeAt(index);
@@ -85,6 +91,9 @@ class _BreakActivitiesScreenState extends State<BreakActivitiesScreen> {
                       builder: (context) => ViewBreakActivityScreen(
                         name: activities[index].name,
                         details: activities[index].details,
+                        onUpdate: (updatedName, updatedDetails) {
+                          _updateActivity(index, updatedName, updatedDetails);
+                        },
                       ),
                     ),
                   );
@@ -133,6 +142,9 @@ class _BreakActivitiesScreenState extends State<BreakActivitiesScreen> {
                   builder: (context) => ViewBreakActivityScreen(
                     name: activity.name,
                     details: activity.details,
+                    onUpdate: (updatedName, updatedDetails) {
+                      _updateActivity(index, updatedName, updatedDetails);
+                    },
                   ),
                 ),
               );
