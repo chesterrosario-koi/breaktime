@@ -24,7 +24,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: 'My Dashboard', showBackButton: false),
+      appBar: const CustomAppBar(
+        title: 'My Dashboard',
+        showBackButton: false,  // Hide the back arrow button
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0), // Add padding around the content
         child: Column(

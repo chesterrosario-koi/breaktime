@@ -22,7 +22,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 Navigator.pop(context);
               },
             )
-          : null,
+          : const SizedBox.shrink(),  // Use an empty widget to hide the back button
       title: Text(
         title,
         style: const TextStyle(
