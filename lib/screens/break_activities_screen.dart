@@ -1,3 +1,4 @@
+import 'package:breaktime/screens/add_break_activity_screen.dart';
 import 'package:breaktime/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import '../widgets/custom_app_bar.dart';
@@ -35,7 +36,10 @@ class _BreakActivitiesScreenState extends State<BreakActivitiesScreen> {
         action: IconButton(
           icon: const Icon(Icons.add),
           onPressed: () {
-            // Add new break activity
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const AddBreakActivityScreen()),
+            );
           },
         ),
       ),
