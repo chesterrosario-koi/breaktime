@@ -1,3 +1,4 @@
+import 'package:breaktime/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import '../widgets/custom_app_bar.dart';
 import '../widgets/custom_bottom_nav_bar.dart';
@@ -26,7 +27,10 @@ class _BreakActivitiesScreenState extends State<BreakActivitiesScreen> {
         title: 'Break activities',
         showBackButton: true,
         onBackButtonPressed: () {
-          Navigator.pop(context);
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const HomeScreen()),
+          );
         },
         action: IconButton(
           icon: const Icon(Icons.add),

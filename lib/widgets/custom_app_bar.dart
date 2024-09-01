@@ -3,14 +3,15 @@ import 'package:flutter/material.dart';
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool showBackButton;
-  final VoidCallback? onBackButtonPressed; // Optional callback for back button
+  final VoidCallback? onBackButtonPressed;
+  final Widget? action;
 
   const CustomAppBar({
     super.key,
     required this.title,
     this.showBackButton = true,
     this.onBackButtonPressed,
-    IconButton? action,
+    this.action,
   });
 
   @override
@@ -35,6 +36,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       centerTitle: true,
+      actions: action != null ? [action!] : null,
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(1.0),
         child: Container(
