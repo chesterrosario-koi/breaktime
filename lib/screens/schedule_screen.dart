@@ -81,59 +81,68 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
           children: _startTimes.keys.map((day) {
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Row(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          day,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        const Text('Start'),
-                        GestureDetector(
-                          onTap: () => _selectTime(context, day, true),
-                          child: AbsorbPointer(
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.symmetric(
-                                    vertical: 10, horizontal: 10),
-                                border: const OutlineInputBorder(),
-                                hintText: _formatTimeOfDay(_startTimes[day]!),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                  Text(
+                    day,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 30),
-                        const Text('End'),
-                        GestureDetector(
-                          onTap: () => _selectTime(context, day, false),
-                          child: AbsorbPointer(
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.symmetric(
-                                    vertical: 10, horizontal: 10),
-                                border: const OutlineInputBorder(),
-                                hintText: _formatTimeOfDay(_endTimes[day]!),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text('Start'),
+                            GestureDetector(
+                              onTap: () => _selectTime(context, day, true),
+                              child: AbsorbPointer(
+                                child: SizedBox(
+                                  height: 50,
+                                  child: TextFormField(
+                                    decoration: InputDecoration(
+                                      contentPadding: const EdgeInsets.symmetric(
+                                          vertical: 10, horizontal: 10),
+                                      border: const OutlineInputBorder(),
+                                      hintText: _formatTimeOfDay(_startTimes[day]!),
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text('End'),
+                            GestureDetector(
+                              onTap: () => _selectTime(context, day, false),
+                              child: AbsorbPointer(
+                                child: SizedBox(
+                                  height: 50,
+                                  child: TextFormField(
+                                    decoration: InputDecoration(
+                                      contentPadding: const EdgeInsets.symmetric(
+                                          vertical: 10, horizontal: 10),
+                                      border: const OutlineInputBorder(),
+                                      hintText: _formatTimeOfDay(_endTimes[day]!),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
