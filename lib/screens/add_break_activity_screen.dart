@@ -59,13 +59,12 @@ class _AddBreakActivityScreenState extends State<AddBreakActivityScreen> {
               onPressed: () {
                 if (_nameController.text.isNotEmpty) {
                   Navigator.pop(context, {
-                    'action': 'add',
                     'name': _nameController.text,
                     'details': _detailsController.text,
                   });
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Name and Details cannot be empty')),
+                    const SnackBar(content: Text('Name cannot be empty')),
                   );
                 }
               },
