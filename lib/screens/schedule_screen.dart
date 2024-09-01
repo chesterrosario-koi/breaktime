@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/custom_app_bar.dart';
 import '../widgets/custom_bottom_nav_bar.dart';
+import '../utils/snackbar_utils.dart';
 import 'home_screen.dart';
 
 class ScheduleScreen extends StatefulWidget {
@@ -143,7 +144,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                 padding: const EdgeInsets.only(top: 10.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    // Handle save action
+                    showCustomSnackBar(context, 'Schedule saved!');
                   },
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
