@@ -12,6 +12,9 @@ class AddBreakActivityScreen extends StatefulWidget {
 class _AddBreakActivityScreenState extends State<AddBreakActivityScreen> {
   int _selectedIndex = 1;
 
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _detailsController = TextEditingController();
+
   void _onItemTapped(int index) {
     handleBottomNavigationTap(context, index);
     setState(() {
@@ -35,6 +38,7 @@ class _AddBreakActivityScreenState extends State<AddBreakActivityScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             TextFormField(
+              controller: _nameController,
               decoration: const InputDecoration(
                 labelText: 'Name',
                 border: OutlineInputBorder(),
@@ -42,6 +46,7 @@ class _AddBreakActivityScreenState extends State<AddBreakActivityScreen> {
             ),
             const SizedBox(height: 16),
             TextFormField(
+              controller: _detailsController,
               maxLines: 5,
               decoration: const InputDecoration(
                 labelText: 'Details',
@@ -52,7 +57,17 @@ class _AddBreakActivityScreenState extends State<AddBreakActivityScreen> {
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
-                Navigator.pop(context, 'add');
+                if (_nameController.text.isNotEmpty) {
+                  Navigator.pop(context, {
+                    'action': 'add',
+                    'name': _nameController.text,
+                    'details': _detailsController.text,
+                  });
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Name and Details cannot be empty')),
+                  );
+                }
               },
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 16),

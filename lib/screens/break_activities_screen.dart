@@ -1,9 +1,10 @@
-import 'package:breaktime/utils/snackbar_utils.dart';
 import 'package:flutter/material.dart';
 import '../widgets/custom_app_bar.dart';
 import '../widgets/custom_bottom_nav_bar.dart';
 import 'add_break_activity_screen.dart';
 import 'home_screen.dart';
+import '../utils/snackbar_utils.dart';
+import '../models/activity.dart';
 
 class BreakActivitiesScreen extends StatefulWidget {
   const BreakActivitiesScreen({super.key});
@@ -15,10 +16,23 @@ class BreakActivitiesScreen extends StatefulWidget {
 class _BreakActivitiesScreenState extends State<BreakActivitiesScreen> {
   int _selectedIndex = 1;
 
+  List<Activity> activities = [
+    Activity(name: 'Stretch', details: 'Stretch your arms and legs.'),
+    Activity(name: 'Drink water', details: 'Drink a glass of water.'),
+    Activity(name: 'Walk', details: 'Take a short walk.'),
+    Activity(name: 'Run', details: 'Go for a quick run.')
+  ];
+
   void _onItemTapped(int index) {
     handleBottomNavigationTap(context, index);
     setState(() {
       _selectedIndex = index;
+    });
+  }
+
+  void _addActivity(String name, String details) {
+    setState(() {
+      activities.add(Activity(name: name, details: details));
     });
   }
 
@@ -42,7 +56,8 @@ class _BreakActivitiesScreenState extends State<BreakActivitiesScreen> {
               MaterialPageRoute(builder: (context) => const AddBreakActivityScreen()),
             );
 
-            if (result == 'add') {
+            if (result['action'] == 'add') {
+              _addActivity(result['name']!, result['details']!);
               showCustomSnackBar(context, 'Break activity saved!');
             }
           },
@@ -50,16 +65,14 @@ class _BreakActivitiesScreenState extends State<BreakActivitiesScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: ListView(
-          children: [
-            _buildActivityItem('Stretch'),
-            const SizedBox(height: 16),
-            _buildActivityItem('Drink water'),
-            const SizedBox(height: 16),
-            _buildActivityItem('Walk'),
-            const SizedBox(height: 16),
-            _buildActivityItem('Run'),
-          ],
+        child: ListView.builder(
+          itemCount: activities.length,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 16.0),
+              child: _buildActivityItem(activities[index]),
+            );
+          },
         ),
       ),
       bottomNavigationBar: CustomBottomNavBar(
@@ -69,7 +82,7 @@ class _BreakActivitiesScreenState extends State<BreakActivitiesScreen> {
     );
   }
 
-  Widget _buildActivityItem(String title) {
+  Widget _buildActivityItem(Activity activity) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       decoration: BoxDecoration(
@@ -80,7 +93,7 @@ class _BreakActivitiesScreenState extends State<BreakActivitiesScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            title,
+            activity.name,
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w500,
