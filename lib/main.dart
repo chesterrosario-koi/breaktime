@@ -1,3 +1,6 @@
+import 'package:breaktime/screens/articles_screen.dart';
+import 'package:breaktime/screens/break_activities_screen.dart';
+import 'package:breaktime/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'screens/login_screen.dart';
 import 'screens/registration_screen.dart';
@@ -25,7 +28,10 @@ class BreakTimeApp extends StatelessWidget {
         '/': (context) => const LoginScreen(),
         '/register': (context) => const RegistrationScreen(),
         '/home': (context) => const HomeScreen(),
+        '/activities': (context) => const BreakActivitiesScreen(),
         '/schedule': (context) => const ScheduleScreen(),
+        '/articles': (context) => const ArticlesScreen(),
+        '/settings': (context) => const SettingsScreen(),
       },
     );
   }
